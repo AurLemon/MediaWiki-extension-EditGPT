@@ -1,0 +1,106 @@
+#EditGPTWidget {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 20px;
+}
+
+#EditGPTWidget #EditGPTToolbar {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+    display: flex;
+    border-bottom: 1px solid var(--border-color-base);
+    justify-content: space-between;
+    flex-basis: 100%;
+    padding-bottom: 10px;
+    align-items: center;
+}
+
+#EditGPTWidget #EditGPTToolbar > *:last-child {
+    margin-left: auto;
+  }
+
+#EditGPTWidget #EditGPTToolbar #title {
+    font-weight: bold;
+}
+
+#EditGPTWidget #EditGPTToolbar #logo {
+    height: auto;
+    opacity: var(--opacity-icon-base);
+    width: 30px;
+    margin-right: 10px;
+}
+
+html.skin-citizen-dark #EditGPTWidget #EditGPTToolbar #logo {
+	filter: invert( 1 );
+}
+
+#EditGPTWidget #EditGPTToolbar #button{
+    display: flex;
+    gap: 5px;
+}
+
+#EditGPTWidget #EditGPTToolbar #button #EditGPTButton,
+#EditGPTWidget #EditGPTToolbar #button #EditGPTCopy {
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    background-color: var(--color-primary);
+    color: white;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 7px;
+    display: block;
+    transition: background 100ms ease,color 100ms ease;
+}
+
+#EditGPTWidget #EditGPTToolbar #button #EditGPTButton:hover,
+#EditGPTWidget #EditGPTToolbar #button #EditGPTCopy:hover {
+    background-color: var(--color-primary--hover);
+}
+
+#EditGPTWidget textarea {
+    padding: 10px;
+    font-size: 14px;
+    resize: none;
+    height: 200px;
+    font-family: system-ui;
+    width: auto;
+    border-radius: 15px;
+}
+
+#EditGPTWidget #input {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+#EditGPTWidget #output {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+#EditGPTWidget #EditGPTOutput {
+    overflow-y: auto;
+    border: 1px solid var(--border-color-base);
+    background-color: var(--color-surface-1);
+    padding: 10px;
+    font-size: 14px;
+    height: 200px;
+    font-family: system-ui;
+    width: auto;
+    border-radius: 15px;
+}
+
+#EditGPTWidget #input,
+#EditGPTWidget #output {
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+}
+
+#type-name {
+    font-size: 12px;
+}
+
+/* 加载动画 */

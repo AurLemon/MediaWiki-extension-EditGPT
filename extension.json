@@ -1,0 +1,80 @@
+{
+	"name": "EditGPT",
+	"author": [
+		"AurLemon",
+        "ChatGPT"
+	],
+    "version": "0.1",
+	"descriptionmsg": "editgpt-desc",
+	"url": "https://wiki.hydcraft.cn/Player:柠檬",
+	"license-name": "GPL-2.0-or-later",
+	"requires": {
+		"MediaWiki": ">= 1.35.0"
+	},
+	"AutoloadClasses": {
+		"EditGPTHooks": "includes/EditGPTHooks.php",
+        "GPTRequest": "includes/GPTRequest.php"
+	},
+    "GroupPermissions": {
+		"user": {
+			"useeditgpt": true
+		}
+	},
+	"AvailableRights": [
+		"useeditgpt"
+	],
+	"ResourceModules": {
+		"ext.EditGPT": {
+			"scripts": [
+				"resources/EditGPT.js"
+			],
+            "messages": [
+				"editgpt-button-label",
+                "editgpt-button-copy",
+                "editgpt-title",
+                "editgpt-input",
+                "editgpt-output",
+                "editgpt-history"
+			],
+			"styles": [
+				"resources/EditGPT.css"
+			],
+			"dependencies": [
+				"mediawiki.api",
+				"oojs-ui",
+				"oojs-ui.styles.icons-editing-core",
+				"jquery.textSelection",
+				"jquery.spinner",
+				"oojs-ui-core",
+				"oojs-ui-widgets"
+			],
+			"localBasePath": ".",
+			"remoteExtPath": "EditGPT"
+		}
+	},
+	"Hooks": {
+		"BeforePageDisplay": [
+			"EditGPTHooks::onBeforePageDisplay"
+		]
+	},
+	"config": {
+		"wgEditGPTAPIBase": {
+			"type": "string",
+			"value": "https://api.openai.com"
+		},
+		"wgEditGPTAPIKey": {
+			"type": "string",
+			"value": ""
+		},
+        "wgEditGPTModel": {
+			"type": "string",
+			"value": "gpt-3.5-turbo"
+		}
+	},
+	"manifest_version": 2,
+    "MessagesDirs": {
+        "EditGPT": [
+            "i18n"
+        ]
+    }
+}

@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"奥若拉柠檬",
+			"ChatGPT"
+		]
+	},
+    "editgpt-desc": "在编辑界面引入 ChatGPT 以便用户对页面内容进行润色或修改。",
+    "editgpt-button-label": "开始生成",
+    "editgpt-button-copy": "复制输出结果",
+    "editgpt-title": "ChatGPT 对话框",
+    "editgpt-input": "输入信息",
+    "editgpt-output": "输出信息",
+    "editgpt-history": "历史记录"
+}
