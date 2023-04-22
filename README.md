@@ -1,4 +1,4 @@
-# MediaWiki-extensions-EditGPT
+# MediaWiki-extension-EditGPT
 在 MediaWiki 的编辑页面中调用 ChatGPT。
 
 ## 前言
@@ -32,10 +32,12 @@
 2. 如果有需要，可以为其它权限组配置使用 GPT 的权限。如允许界面管理员使用扩展`$wgGroupPermissions['interface-admin']['useeditgpt'] = true;`。
 
 ## 参数
-* `$wgEditGPTAPIBase` API 链接。默认为 OpenAI 的地址，如果需要更换为其它代理站点，可更换此信息。如`https://api.openai-azure.com`。
-* `$wgEditGPTAPIKey` API Key。
-* `$wgEditGPTModel` 调用的模型。
-* `$wgEditGPTMaxTokens` 最大 Token 数值。
-* `$wgEditGPTTemperature` 模型温度，具体介绍可参见 OpenAI 的介绍。
-* `$wgEditGPTRole` 模型角色。
-* `$wgEditGPTSecurityToken` 验证令牌，避免恶意请求后端。可自行设置。
+| 用途 | 参数 | 简介 |
+| :- | :- | :- |
+| API 链接 | `$wgEditGPTAPIBase` | API 链接。默认为 OpenAI 的地址，如果需要更换为其它代理站点，可更换此信息。<br>如`https://api.openai-azure.com`。 |
+| API Key | `$wgEditGPTAPIKey` | 无
+| 调用模型 | `$wgEditGPTModel` | 调用的模型。 |
+| 最大 Token | `$wgEditGPTMaxTokens` | 最大 Token 数值。 |
+| 模型温度 | `$wgEditGPTTemperature` | 模型温度，具体介绍可参见 OpenAI 的介绍。 |
+| 模型角色 | `$wgEditGPTRole` | 模型角色。 |
+| 安全令牌 | `$wgEditGPTSecurityToken` | 验证令牌，避免恶意请求后端。可自行设置。 |
