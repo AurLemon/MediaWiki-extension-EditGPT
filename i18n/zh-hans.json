@@ -1,15 +1,19 @@
 {
-	"@metadata": {
-		"authors": [
-			"奥若拉柠檬",
-			"ChatGPT"
-		]
-	},
     "editgpt-desc": "在编辑界面引入 ChatGPT 以便用户对页面内容进行润色或修改。",
     "editgpt-button-label": "开始生成",
     "editgpt-button-copy": "复制输出结果",
     "editgpt-title": "ChatGPT 对话框",
     "editgpt-input": "输入信息",
     "editgpt-output": "输出信息",
-    "editgpt-history": "历史记录"
+    "editgpt-history": "历史记录",
+    "apihelp-editgptrequest-summary": "EditGPT 向 API 发送请求的模块。",
+    "editgpt-copy-success": "复制成功",
+    "editgpt-request-sending": "请求已发送，请等待服务器响应。",
+    "editgpt-request-empty": "请输入信息，空请求无法发送。",
+    "editgpt-request-failed": "请求错误，请检查浏览器网络设置或站点API设置。",
+    "editgpt-completion-created": "创建时间",
+    "editgpt-completion-totaltoken": "消耗的Token数量",
+    "editgpt-completion-model": "调用模型",
+    "editgpt-completion-comma": "、",
+    "editgpt-completion-period": "。"
 }
