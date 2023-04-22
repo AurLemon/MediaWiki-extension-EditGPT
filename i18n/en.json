@@ -1,3 +1,19 @@
 {
-    "editgpt-button-label": "Edit with GPT"
+    "editgpt-desc": "Introduce ChatGPT in the editing interface so that users can polish or modify the content of the page.",
+    "editgpt-button-label": "Start generating",
+    "editgpt-button-copy": "Copy output",
+    "editgpt-title": "ChatGPT dialog",
+    "editgpt-input": "Input",
+    "editgpt-output": "Output",
+    "editgpt-history": "History",
+    "apihelp-editgptrequest-summary": "the EditGPT modules of send request through API",
+    "editgpt-copy-success": "Copy successfully",
+    "editgpt-request-sending": "The request has been sent, please wait for the server to respond.",
+    "editgpt-request-empty": "Please enter information, empty requests cannot be sent.",
+    "editgpt-request-failed": "Request error, please check browser network settings or site API settings.",
+    "editgpt-completion-created": "Created",
+    "editgpt-completion-totaltoken": "Tokens total used",
+    "editgpt-completion-model": "Call model",
+    "editgpt-completion-comma": ", ",
+    "editgpt-completion-period": "."
 }
