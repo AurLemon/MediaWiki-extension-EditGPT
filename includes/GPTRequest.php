@@ -1,46 +1,74 @@
 <?php
 
-class GPTRequest {
-    public static function generateResponse($inputText) {
-        global $wgEditGPTAPIBase, $wgEditGPTAPIKey, $wgEditGPTModel;
+use ApiBase;
+use MediaWiki\MediaWikiServices;
+use function curl_init;
+use function curl_setopt;
+use function curl_exec;
 
-        $curl = curl_init();
+class GPTRequest extends ApiBase {
+    public function extractRequestParams() {
+        $params = [];
+        $params['inputText'] = $_REQUEST['inputText'] ?? '';
+        $params['Token'] = $_REQUEST['Token'] ?? '';
+        return $params;
+    }  
+    public function execute() {
+        $params = $this->extractRequestParams();
+        $token = $params['Token'];
 
-        $data = array(
-            'model' => $wgEditGPTModel,
-            'prompt' => $inputText,
-            'temperature' => 0.7,
-            'max_tokens' => 60,
-            'n' => 1,
-            'stop' => '\n'
-        );
-
-        $headers = array(
-            'Content-Type: application/json',
-            'Authorization: Bearer ' . $wgEditGPTAPIKey
-        );
-
-        $url = $wgEditGPTAPIBase;
-
-        curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curl, CURLOPT_POST, 1);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
-
-        $response = curl_exec($curl);
-
-        if (curl_errno($curl)) {
-            $error_msg = curl_error($curl);
-            curl_close($curl);
-            return false;
+        if ($token !== $GLOBALS['wgEditGPTSecurityToken']) {
+            throw new Exception("Token error");
         }
+        // $url = $GLOBALS['wgServer'] . $GLOBALS['wgScriptPath'] . '/api.php?action=checktoken&type=login&token=' . $token . '%2B%5C';
+        // $cu = curl_init($url);
+        // curl_setopt($cu, CURLOPT_RETURNTRANSFER, true);
+        // $tokenResult = curl_exec($cu);
+        // $httpcode = curl_getinfo($cu, CURLINFO_HTTP_CODE);
+        // if ($tokenResult === false || $httpcode != 200) {
+        //     $error = curl_error($cu);
+        //     throw new Exception("cURL Error: $error");
+        // }
+        // $response = json_decode($tokenResult, true);
 
-        curl_close($curl);
-
-        $response = json_decode($response, true);
-        $output = $response['choices'][0]['text'];
-
-        return $output;
-    }
+        $inputText = $params['inputText'];
+        if (empty($inputText)) {
+            throw new InvalidArgumentException('Invalid input text.');
+        }
+    
+        $apiUrl = $GLOBALS['wgEditGPTAPIBase'] . '/v1/chat/completions';
+    
+        $data = array(
+            'model' => $GLOBALS['wgEditGPTModel'],
+            'messages' => [
+                [
+                    'role' => $GLOBALS['wgEditGPTRole'],
+                    'content' => $inputText
+                ]
+            ],
+            'max_tokens' => $GLOBALS['wgEditGPTMaxTokens'],
+            'temperature' => $GLOBALS['wgEditGPTTemperature']
+        );
+    
+        $ch = curl_init($apiUrl);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json',
+            'Authorization: Bearer ' . $GLOBALS['wgEditGPTAPIKey']
+        ]);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        $result = curl_exec($ch);
+        $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        if ($result === false || $httpcode != 200) {
+            $error = curl_error($ch);
+            throw new Exception("cURL Error: $error");
+        }
+        curl_close($ch);
+    
+        $this->getResult()->addValue(null, $this->getModuleName(), $result);
+        return $result;
+    }       
 }
