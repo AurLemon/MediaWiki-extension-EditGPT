@@ -1,24 +1,22 @@
 <?php
 
 use ApiBase;
+use Wikimedia\ParamValidator\ParamValidator;
 use MediaWiki\MediaWikiServices;
 use function curl_init;
 use function curl_setopt;
 use function curl_exec;
 
 class GPTRequest extends ApiBase {
-    public function extractRequestParams() {
-        $params = [];
-        $params['inputText'] = $_REQUEST['inputText'] ?? '';
-        $params['Token'] = $_REQUEST['Token'] ?? '';
-        return $params;
-    }  
     public function execute() {
+        // $inputText = $this->getAllowedParams('inputText');
+        // $token = $this->getAllowedParams('Token');
+        // throw new Exception($this->getAllowedParams());
         $params = $this->extractRequestParams();
         $token = $params['Token'];
 
         if ($token !== $GLOBALS['wgEditGPTSecurityToken']) {
-            throw new Exception("Token error");
+            throw new Exception("Token error: $token");
         }
         // $url = $GLOBALS['wgServer'] . $GLOBALS['wgScriptPath'] . '/api.php?action=checktoken&type=login&token=' . $token . '%2B%5C';
         // $cu = curl_init($url);
@@ -70,5 +68,25 @@ class GPTRequest extends ApiBase {
     
         $this->getResult()->addValue(null, $this->getModuleName(), $result);
         return $result;
-    }       
+    }
+    
+    // public function extractRequestParams() {
+    //     $params = [];
+    //     $params['inputText'] = $_REQUEST['inputText'] ?? '';
+    //     $params['Token'] = $_REQUEST['Token'] ?? '';
+    //     return $params;
+    // }  
+    public function getAllowedParams() {
+    return [
+        'inputText' => [
+            ApiBase::PARAM_TYPE => 'string',
+            ApiBase::PARAM_REQUIRED => true,
+        ],
+        'Token' => [
+            ApiBase::PARAM_TYPE => 'string',
+            ApiBase::PARAM_REQUIRED => true,
+        ],
+    ];
+}
+
 }
