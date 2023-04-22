@@ -20,7 +20,7 @@
         ]
 	},
     "GroupPermissions": {
-		"admin": {
+		"sysop": {
 			"useeditgpt": true
 		}
 	},
