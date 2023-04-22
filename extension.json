@@ -20,7 +20,7 @@
         ]
 	},
     "GroupPermissions": {
-		"user": {
+		"admin": {
 			"useeditgpt": true
 		}
 	},
