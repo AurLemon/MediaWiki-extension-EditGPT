@@ -60,7 +60,7 @@ html.skin-citizen-dark #EditGPTWidget #EditGPTToolbar #logo {
     background-color: var(--color-primary--hover);
 }
 
-#EditGPTWidget textarea {
+#EditGPTWidget #input textarea {
     padding: 10px;
     font-size: 14px;
     resize: none;
@@ -80,7 +80,7 @@ html.skin-citizen-dark #EditGPTWidget #EditGPTToolbar #logo {
     grid-row: 2;
 }
 
-#EditGPTWidget #EditGPTOutput {
+#EditGPTWidget #output #EditGPTOutput {
     overflow-y: auto;
     border: 1px solid var(--border-color-base);
     background-color: var(--color-surface-1);
@@ -90,6 +90,28 @@ html.skin-citizen-dark #EditGPTWidget #EditGPTToolbar #logo {
     font-family: system-ui;
     width: auto;
     border-radius: 15px;
+}
+
+#EditGPTWidget #Console {
+    grid-column: 1 / span 2;
+    grid-row: 3;
+    font-size: 12px;
+    height: 30px;
+    border-radius: 15px;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+}
+
+#EditGPTWidget #Console img {
+    height: auto;
+    opacity: var(--opacity-icon-base);
+    width: 24px;
+    margin-right: 10px;
+}
+
+html.skin-citizen-dark #EditGPTWidget #Console img {
+    filter: invert( 1 );
 }
 
 #EditGPTWidget #input,

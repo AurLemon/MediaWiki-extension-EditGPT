@@ -1,8 +1,8 @@
 ( function ( mw, $, OO ) {
     var EditGPT = {
-        apiBase: mw.config.get('EditGPTAPIBase'),
-        apiKey: mw.config.get('EditGPTAPIKey'),
-        apiModel: mw.config.get('EditGPTModel'),
+        // apiBase: mw.config.get('EditGPTAPIBase'),
+        // apiKey: mw.config.get('EditGPTAPIKey'),
+        // apiModel: mw.config.get('EditGPTModel'),
         init: function () {
             if ($('#EditGPTWidget').length) {
                 this.addEventListeners();
@@ -18,9 +18,12 @@
             mw.message('editgpt-button-label').plain() +
             '</button><button id="EditGPTCopy">' +
             mw.message('editgpt-button-copy').plain() +
-            '</button></div></div>' +
+            '</button>' +
+            '</div></div>' +
             '<div id="input"><div id="type-name">'+ mw.message('editgpt-input').plain() +'</div><textarea id="EditGPTInput"></textarea></div>' +
-            '<div id="output"><div id="type-name">'+ mw.message('editgpt-output').plain() +'</div><div id="EditGPTOutput"></div></div>';
+            '<div id="output"><div id="type-name">'+ mw.message('editgpt-output').plain() +'</div><div id="EditGPTOutput"></div></div>' +
+            '<div id="Console"><img id="logo" src="data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIGhlaWdodD0nNDgnIHZpZXdCb3g9JzAgOTYgOTYwIDk2MCcgd2lkdGg9JzQ4Jz48cGF0aCBkPSdNMTQwIDg5NnEtMjQgMC00Mi0xOHQtMTgtNDJWMzE2cTAtMjQgMTgtNDJ0NDItMThoNjgwcTI0IDAgNDIgMTh0MTggNDJ2NTIwcTAgMjQtMTggNDJ0LTQyIDE4SDE0MFptMC02MGg2ODBWNDAwSDE0MHY0MzZabTE2MC03Mi00Mi00MiAxMDMtMTA0LTEwNC0xMDQgNDMtNDIgMTQ2IDE0Ni0xNDYgMTQ2Wm0xOTAgNHYtNjBoMjIwdjYwSDQ5MFonLz48L3N2Zz4=" /><div id="Console-info">欢迎使用EditGPT。输入您的问题后即可调用ChatGPT。</div>' +
+            '</div></div>';
 
             var self = this;
             $('#EditGPTWidget').html(htmlText);
@@ -42,43 +45,59 @@
                     }
                   }
                   copyElementContentToClipboard("#EditGPTOutput");
-                  mw.notify("复制成功");
+                  mw.notify(mw.message('editgpt-copy-success').plain());
             });
         },
 
         getEditedText: function () {
-            var self = this;
             var inputText = $('#EditGPTInput').val();
-            var data = {
-                model: self.apiModel,
-                messages: [{ role: 'user', content: inputText }]
-            };
-            $.ajax({
-                url: self.apiBase + '/v1/chat/completions',
+            if (inputText !== '') {
+                var buttonOutput = $('#Console-info');
+                buttonOutput.html(mw.message('editgpt-request-sending').plain());
+
+                $.ajax({
+                url: mw.util.wikiScript('api'),
                 type: 'POST',
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader('Authorization', 'Bearer ' + self.apiKey);
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader('Api-User-Agent', 'EditGPT/1.0');
                 },
-                data: JSON.stringify(data),
-                contentType: 'application/json; charset=utf-8',
+                data: {
+                    action: 'editgptrequest',
+                    format: 'json',
+                    inputText: inputText,
+                    Token: mw.config.get('EditGPTSecurityToken')
+                },
                 dataType: 'json'
-            }).done(function (response) {
-                var editedText = response.choices[0].message.content;
-                var editedTextArray = editedText.split('');
-                var i = 0;
-                var output = $('#EditGPTOutput');
-                output.html('');
-                var timer = setInterval(function () {
-                    if (i < editedTextArray.length) {
-                        output.append(editedTextArray[i]);
-                        i++;
-                    } else {
-                        clearInterval(timer);
-                    }
-                }, 50);
-            }).fail(function (xhr, textStatus, errorThrown) {
-                console.error('EditGPT API request failed: ' + errorThrown);
-            });
+                }).done(function(response) {
+                    var editedText = JSON.parse(response.editgptrequest).choices[0].message.content;
+                    var createdTime = JSON.parse(response.editgptrequest).created;
+                    var modelType = JSON.parse(response.editgptrequest).model;
+                    var totalTokens = JSON.parse(response.editgptrequest).usage.total_tokens;
+
+                    var editedTextArray = editedText.split('');
+                    var i = 0;
+                    var output = $('#EditGPTOutput');
+                    output.html('');
+                    var timer = setInterval(function () {
+                        if (i < editedTextArray.length) {
+                            output.append(editedTextArray[i]);
+                            i++;
+                        } else {
+                            clearInterval(timer);
+                        }
+                    }, 50);
+                    
+                    var consoleOutputSplit = mw.message('editgpt-completion-comma').plain();
+                    var consoleOutput = $('#Console-info');
+                    consoleOutput.html(mw.message('editgpt-completion-created').plain() + ': ' + createdTime + consoleOutputSplit + mw.message('editgpt-completion-totaltoken').plain() + ': ' + totalTokens + consoleOutputSplit + mw.message('editgpt-completion-model').plain() + ': ' + modelType + mw.message('editgpt-completion-period').plain());
+                }).fail(function(xhr, textStatus, errorThrown) {
+                    var consoleOutput = $('#Console-info');
+                    consoleOutput.html(mw.message('editgpt-request-failed').plain());
+                });   
+            } else {
+                var output = $('#Console-info');
+                output.html(mw.message('editgpt-request-empty').plain());
+            }
         }        
     };
     $(document).ready(function () {
