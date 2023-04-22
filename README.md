@@ -23,7 +23,7 @@
 * 可设置固定话术。
 
 ## 安装
-1. 在`/extensions`目录下输入`git clone https://github.com/AurLemon/MediaWiki-extensions-EditGPT.git`。
+1. 在`/extensions`目录下输入`git clone https://github.com/AurLemon/MediaWiki-extension-EditGPT.git`。
 2. 将解压后的文件夹重命名为`EditGPT`。
 3. 在`LocalSettings.php`文件中添加`wfLoadExtension( 'EditGPT' );`加载扩展
 
