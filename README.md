@@ -6,25 +6,22 @@
 在 MediaWiki 的编辑页面中调用 ChatGPT。
 
 ## 前言
-### 原理
 随便写写的扩展，本人没系统学习过前后端，这个扩展是边学边写出来。原理很简单，扩展在编辑页面和预览页面加入 HTML 代码和 CSS 元素以生成 ChatGPT 对话框。再使用 JavaScript 代码向后端发送问题，处理完信息后返回并输出。
-
-### 须知
-* 对话框界面基于皮肤 Citizen 开发，可能有些 CSS 变量在其他皮肤上无法正常运行。
-* 目前只能在源代码编辑下出现，在可视化编辑（VisualEditor）下不可用。
-* 编辑页面的 GPT 不能上下文对话。
 
 ## 要求
 | MediaWiki | >= 1.35 |
 | :- | :- |
 |  PHP | >= 7<br>扩展需要使用 cURL 函数，确保 libcurl 包已安装。|
 
-## 功能
+## 特性
 * 通过后端发送请求。
 * 权限节点为`useeditgpt`。默认仅`sysop`权限组可用。
 * 查询历史询问记录，页面刷新后消失。
 * 可在特殊页面 Special:ChatGPT 实现上下文对话，权限节点为`specialchatgpt`。
 * 可设置固定话术。
+* 对话框界面基于皮肤 Citizen 开发，可能有些 CSS 变量在其他皮肤上无法正常运行。
+* 目前只能在源代码编辑下出现，在可视化编辑（VisualEditor）下不可用。
+* 编辑页面的 GPT 不能上下文对话。
 
 ## 安装
 1. 在`/extensions`目录下输入`git clone https://github.com/AurLemon/MediaWiki-extension-EditGPT.git`。
