@@ -1,4 +1,8 @@
 # MediaWiki-extension-EditGPT
+[![License: GPL v2](https://img.shields.io/badge/License-GPLv2-blue.svg?style=flat-square&logo=GNU)](https://www.gnu.org/licenses/gpl-2.0) [![MediaWiki: >=1.35.0](https://img.shields.io/badge/MediaWiki-%3E%3D1.35.0-%2336c?style=flat-square&logo=Wikipedia)](https://www.mediawiki.org)
+
+![1682183013977](https://user-images.githubusercontent.com/67463076/233797285-cd138313-97e9-48f0-9be9-d7c1c930dd24.png)
+
 在 MediaWiki 的编辑页面中调用 ChatGPT。
 
 ## 前言
@@ -26,6 +30,7 @@
 1. 在`/extensions`目录下输入`git clone https://github.com/AurLemon/MediaWiki-extension-EditGPT.git`。
 2. 将解压后的文件夹重命名为`EditGPT`。
 3. 在`LocalSettings.php`文件中添加`wfLoadExtension( 'EditGPT' );`加载扩展
+4. ✔️ 完成。前往 Special:版本 页面中查看是否被正确加载。如果启用了缓存可重启服务器或 PHP。
 
 ## 配置
 1. 在`LocalSettings.php`文件中添加`$wgEditGPTAPIKey = 'sk-xxxxxxxxxxxxxxxxxxxxx';`配置 API Key。
