@@ -7,6 +7,8 @@
     "editgpt-output": "输出信息",
     "editgpt-history": "历史记录",
     "apihelp-editgptrequest-summary": "EditGPT 向 API 发送请求的模块。",
+    "apihelp-editgptrequest-param-inputText": "向 API 发送的提问信息",
+    "apihelp-editgptrequest-param-Token": "验证可用性的安全密钥",
     "editgpt-copy-success": "复制成功",
     "editgpt-request-sending": "请求已发送，请等待服务器响应。",
     "editgpt-request-empty": "请输入信息，空请求无法发送。",

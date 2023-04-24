@@ -1,0 +1,21 @@
+{
+    "editgpt-desc": "在編輯界面引入 ChatGPT 以便用戶對頁面內容進行潤色或修改。",
+    "editgpt-button-label": "開始生成",
+    "editgpt-button-copy": "複製輸出結果",
+    "editgpt-title": "ChatGPT 對話框",
+    "editgpt-input": "輸入信息",
+    "editgpt-output": "輸出信息",
+    "editgpt-history": "歷史記錄",
+    "apihelp-editgptrequest-summary": "EditGPT 向 API 發送請求的模塊。",
+    "apihelp-editgptrequest-param-inputText": "向 API 發送的提問信息",
+    "apihelp-editgptrequest-param-Token": "驗證可用性的安全密鑰",
+    "editgpt-copy-success": "複製成功",
+    "editgpt-request-sending": "請求已發送，請等待服務器響應。",
+    "editgpt-request-empty": "請輸入信息，空請求無法發送。",
+    "editgpt-request-failed": "請求錯誤，請檢查瀏覽器網絡設置或站點API設置。",
+    "editgpt-completion-created": "創建時間",
+    "editgpt-completion-totaltoken": "消耗的Token數量",
+    "editgpt-completion-model": "調用模型",
+    "editgpt-completion-comma": "、",
+    "editgpt-completion-period": "。"
+}

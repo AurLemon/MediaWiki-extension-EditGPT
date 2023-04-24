@@ -7,6 +7,8 @@
     "editgpt-output": "Output",
     "editgpt-history": "History",
     "apihelp-editgptrequest-summary": "the EditGPT modules of send request through API",
+    "apihelp-editgptrequest-param-inputText": "Question messages sent to the API",
+    "apihelp-editgptrequest-param-Token": "Security key to verify availability",
     "editgpt-copy-success": "Copy successfully",
     "editgpt-request-sending": "The request has been sent, please wait for the server to respond.",
     "editgpt-request-empty": "Please enter information, empty requests cannot be sent.",
