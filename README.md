@@ -11,14 +11,14 @@
 ## 要求
 | MediaWiki | >= 1.35 |
 | :- | :- |
-|  PHP | >= 7<br>扩展需要使用 cURL 函数，确保 libcurl 包已安装。|
-| 主机地域 | 为了避免地域原因导致您的 OpenAI 账户被封禁，请确保主机地域符合 OpenAI 要求。具体名单请参阅[支持的国家/地区](https://platform.openai.com/docs/supported-countries)。<br>网站主机位于香港地区的用户请不要直接使用，可更换主机为台湾地区、日本、新加坡等受支持的地区，也可使用[代理API](https://www.openai-asia.com/)或[云函数](https://cloud.tencent.com/product/scf)远程执行，具体可参阅网上其他教程。 |
+|  PHP | >= 7<br>扩展需要使用 cURL 函数，确保 libcurl 包已安装。可在 phpinfo 内查询 cURL 是否开启。|
+
+此外，请确保主机能够访问外网，包括防火墙配置或主机安全组设置。同时，为了避免地域原因导致您的 OpenAI 账户被封禁，请确保主机地域符合 OpenAI 要求。具体名单请参阅[支持的国家/地区](https://platform.openai.com/docs/supported-countries)。<br>网站主机位于香港地区的用户请不要直接使用，可更换主机为台湾地区、日本、新加坡等受支持的地区，也可使用[代理 API ](https://www.openai-asia.com/)或[云函数](https://cloud.tencent.com/product/scf)远程执行，具体可参阅网上其他教程。
 
 ## 特性
 * 通过后端发送请求。
 * 权限节点为`useeditgpt`。默认仅`sysop`权限组可用。
-* 查询历史询问记录，页面刷新后消失。（暂未实现，等待扩展更新）
-* 可在特殊页面 Special:ChatGPT 实现上下文对话，权限节点为`specialchatgpt`。（暂未实现，等待扩展更新）
+* 查询历史询问记录。（暂未实现，等待扩展更新）
 * 可设置固定话术。（暂未实现，等待扩展更新）
 * 对话框界面基于皮肤 Citizen 开发，可能有些 CSS 变量在其他皮肤上无法正常运行。
 * 目前只能在源代码编辑下出现，在可视化编辑（VisualEditor）下不可用。
