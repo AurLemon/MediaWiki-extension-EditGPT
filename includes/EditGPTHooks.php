@@ -1,7 +1,6 @@
 <?php
 
 use MediaWiki\MediaWikiServices;
-// use MediaWiki\Extension\EditGPT\GPTRequest;
 
 class EditGPTHooks {
     public static function onBeforePageDisplay(OutputPage &$out, Skin &$skin)
@@ -21,7 +20,8 @@ class EditGPTHooks {
                 "</div>"
             );            
             $out->addJsConfigVars([
-                'EditGPTSecurityToken' => $GLOBALS['wgEditGPTSecurityToken']
+                'EditGPTSecurityToken' => $GLOBALS['wgEditGPTSecurityToken'],
+                'EditGPTSpeech' => $GLOBALS['wgEditGPTSpeech']
             ]);
             $out->addModuleStyles('ext.EditGPT.styles');
         }

@@ -1,23 +1,22 @@
 <?php
 
 use ApiBase;
-use Wikimedia\ParamValidator\ParamValidator;
-use MediaWiki\MediaWikiServices;
-use function curl_init;
-use function curl_setopt;
-use function curl_exec;
+use Curl\Curl;
 
 class GPTRequest extends ApiBase {
     public function execute() {
-        // $inputText = $this->getAllowedParams('inputText');
-        // $token = $this->getAllowedParams('Token');
-        // throw new Exception($this->getAllowedParams());
         $params = $this->extractRequestParams();
         $token = $params['Token'];
+        $speechIndex = $params['Speech'];
 
         if ($token !== $GLOBALS['wgEditGPTSecurityToken']) {
             throw new Exception("Token error: $token");
         }
+
+        if ($GLOBALS['wgEditGPTAPIKey'] == null) {
+            throw new Exception("Please enter the API key.");
+        }
+
         // $url = $GLOBALS['wgServer'] . $GLOBALS['wgScriptPath'] . '/api.php?action=checktoken&type=login&token=' . $token . '%2B%5C';
         // $cu = curl_init($url);
         // curl_setopt($cu, CURLOPT_RETURNTRANSFER, true);
@@ -30,6 +29,12 @@ class GPTRequest extends ApiBase {
         // $response = json_decode($tokenResult, true);
 
         $inputText = $params['inputText'];
+
+        if ($speechIndex !== 0) {
+            $speechCustomize = $GLOBALS['wgEditGPTSpeech'];
+            $inputText .= $speechCustomize[$speechIndex - 1]['describe'];
+        }
+
         if (empty($inputText)) {
             throw new InvalidArgumentException('Invalid input text.');
         }
@@ -61,8 +66,9 @@ class GPTRequest extends ApiBase {
         $result = curl_exec($ch);
         $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         if ($result === false || $httpcode != 200) {
-            $error = curl_error($ch);
-            throw new Exception("cURL Error: $error");
+            $data = json_decode($result, true);
+            $message = $data['error']['message'];
+            throw new Exception("An error occurred while requesting '$apiUrl'. Cause: '$message'. It may be a problem with network settings, API Base or API Key settings.");
         }
         curl_close($ch);
     
@@ -70,23 +76,24 @@ class GPTRequest extends ApiBase {
         return $result;
     }
     
-    // public function extractRequestParams() {
-    //     $params = [];
-    //     $params['inputText'] = $_REQUEST['inputText'] ?? '';
-    //     $params['Token'] = $_REQUEST['Token'] ?? '';
-    //     return $params;
-    // }  
     public function getAllowedParams() {
     return [
         'inputText' => [
             ApiBase::PARAM_TYPE => 'string',
             ApiBase::PARAM_REQUIRED => true,
         ],
+        'History' => [
+            ApiBase::PARAM_TYPE => 'string',
+            ApiBase::PARAM_REQUIRED => false,
+        ],
         'Token' => [
             ApiBase::PARAM_TYPE => 'string',
             ApiBase::PARAM_REQUIRED => true,
         ],
+        'Speech' => [
+            ApiBase::PARAM_TYPE => 'string',
+            ApiBase::PARAM_REQUIRED => false,
+        ]
     ];
 }
-
 }
