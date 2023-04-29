@@ -19,7 +19,7 @@
 * 通过后端发送请求。
 * 权限节点为`useeditgpt`。默认仅`sysop`权限组可用。
 * 查询历史询问记录。（暂未实现，等待扩展更新）
-* 可设置固定话术。（暂未实现，等待扩展更新）
+* 可设置固定话术。
 * 对话框界面基于皮肤 Citizen 开发，可能有些 CSS 变量在其他皮肤上无法正常运行。
 * 目前只能在源代码编辑下出现，在可视化编辑（VisualEditor）下不可用。
 * 编辑页面的 GPT 不能上下文对话。
@@ -33,14 +33,28 @@
 ## 配置
 1. 在`LocalSettings.php`文件中添加`$wgEditGPTAPIKey = 'sk-xxxxxxxxxxxxxxxxxxxxx';`配置 API Key。
 2. 如果有需要，可以为其它权限组配置使用 GPT 的权限。如允许界面管理员使用扩展`$wgGroupPermissions['interface-admin']['useeditgpt'] = true;`。
+3. 如果需要配置预设话术，可以根据以下例子配置。
+```php
+$wgEditGPTSpeech = [
+	[
+		"name" => "润色",
+		"describe" => "请用中文帮我润色一下这段文字，让他的条理和逻辑更加顺畅。"
+	],
+	[
+		"name" => "组合",
+		"describe" => "请你帮我把这几点总结成一段文字。"
+	]
+];
+```
 
 ## 参数
-| 用途 | 参数 | 简介 |
-| :- | :- | :- |
-| API 链接 | `$wgEditGPTAPIBase` | API 链接。默认为 OpenAI 的地址，如果需要更换为其它代理站点，可更换此信息。<br>如`https://api.openai-azure.com`。 |
-| API Key | `$wgEditGPTAPIKey` | 无
-| 调用模型 | `$wgEditGPTModel` | 调用的模型。 |
-| 最大 Token | `$wgEditGPTMaxTokens` | 最大 Token 数值。 |
-| 模型温度 | `$wgEditGPTTemperature` | 模型温度，具体介绍可参见 OpenAI 的介绍。 |
-| 模型角色 | `$wgEditGPTRole` | 模型角色。 |
-| 安全令牌 | `$wgEditGPTSecurityToken` | 验证令牌，避免恶意请求后端。可自行设置。 |
+| 用途 | 参数 | 简介 | 值 |
+| :- | :- | :- | :- |
+| API 链接 | `$wgEditGPTAPIBase` | API 链接。默认为 OpenAI 的地址，如果需要更换为其它代理站点，可更换此信息。如`https://api.openai-asia.com`。 | 默认为`https://api.openai.com` |
+| API Key | `$wgEditGPTAPIKey` | API 密钥。 | 无，必填。 |
+| 调用模型 | `$wgEditGPTModel` | 调用的模型。此外，因请求尾链为`/v1/chat/completions`，暂不支持`text-embedding-ada-002`等其它请求方式的模型。 | 默认为`gpt-3.5-turbo` |
+| 最大 Token | `$wgEditGPTMaxTokens` | 客户端接受的最大 Token 数值。 | 默认为`2048` |
+| 模型温度 | `$wgEditGPTTemperature` | 模型温度，具体介绍可参见 OpenAI 的介绍。 | 默认为`0.7` |
+| 模型角色 | `$wgEditGPTRole` | 模型角色。 | 默认为`assistant` |
+| 话术 | `$wgEditGPTSpeech` | 预设话术。设置话术后，用户可以根据此处设定的话术信息发送请求。<br>话术示例：`设定的话术信息`+`提问的信息`。 | 数组。可参照上方示例配置。|
+| 安全令牌 | `$wgEditGPTSecurityToken` | 验证令牌，避免恶意请求后端。可自行设置。 | 默认为字符串。 |
