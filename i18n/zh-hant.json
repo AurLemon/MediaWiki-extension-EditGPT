@@ -6,6 +6,7 @@
     "editgpt-input": "輸入信息",
     "editgpt-output": "輸出信息",
     "editgpt-history": "歷史記錄",
+    "editgpt-welcome-info": "歡迎使用 EditGPT。輸入您的問題後即可調用 ChatGPT。",
     "apihelp-editgptrequest-summary": "EditGPT 向 API 發送請求的模塊。",
     "apihelp-editgptrequest-param-inputText": "向 API 發送的提問信息",
     "apihelp-editgptrequest-param-Token": "驗證可用性的安全密鑰",
@@ -16,6 +17,8 @@
     "editgpt-completion-created": "創建時間",
     "editgpt-completion-totaltoken": "消耗的Token數量",
     "editgpt-completion-model": "調用模型",
+    "editgpt-speech-customize" : "自定義",
+    "editgpt-speech-selected": "已選中的預設話術",
     "editgpt-completion-comma": "、",
     "editgpt-completion-period": "。"
 }
