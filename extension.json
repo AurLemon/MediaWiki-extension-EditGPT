@@ -39,6 +39,7 @@
                 "editgpt-input",
                 "editgpt-output",
                 "editgpt-history",
+				"editgpt-welcome-info",
                 "editgpt-copy-success",
                 "editgpt-request-sending",
                 "editgpt-request-empty",
@@ -47,7 +48,9 @@
                 "editgpt-completion-totaltoken",
                 "editgpt-completion-model",
                 "editgpt-completion-comma",
-                "editgpt-completion-period"
+                "editgpt-completion-period",
+				"editgpt-speech-customize",
+				"editgpt-speech-selected"
 			],
 			"styles": [
 				"resources/EditGPT.css"
@@ -66,26 +69,29 @@
 		}
 	},
 	"config": {
-		"wgEditGPTAPIBase": {
+		"EditGPTAPIBase": {
 			"value": "https://api.openai.com"
 		},
-		"wgEditGPTAPIKey": {
+		"EditGPTAPIKey": {
 			"value": null
 		},
-        "wgEditGPTModel": {
+        "EditGPTModel": {
 			"value": "gpt-3.5-turbo"
 		},
-        "wgEditGPTMaxTokens": {
+        "EditGPTMaxTokens": {
 			"value": 2048
 		},
-        "wgEditGPTTemperature": {
+        "EditGPTTemperature": {
 			"value": 0.7
 		},
-        "wgEditGPTRole": {
-			"value": "user"
+        "EditGPTRole": {
+			"value": "assistant"
 		},
-        "wgEditGPTSecurityToken": {
-			"value": null
+        "EditGPTSecurityToken": {
+			"value": "EditGPTSecurityToken"
+		},
+        "EditGPTSpeech": {
+			"value": []
 		}
 	},
     "APIModules": {
