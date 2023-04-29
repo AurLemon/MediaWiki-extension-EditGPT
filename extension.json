@@ -3,7 +3,7 @@
 	"author": [
 		"AurLemon"
 	],
-    "version": "0.2.0",
+    "version": "0.2.1",
 	"descriptionmsg": "editgpt-desc",
 	"url": "https://github.com/AurLemon/MediaWiki-extensions-EditGPT",
 	"license-name": "GPL-2.0-or-later",
