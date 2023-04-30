@@ -1,6 +1,7 @@
 <?php
 
 use MediaWiki\MediaWikiServices;
+use ResourceLoaderSkinModule;
 
 class EditGPTHooks {
     public static function onBeforePageDisplay(OutputPage &$out, Skin &$skin)
@@ -18,26 +19,25 @@ class EditGPTHooks {
             $out->prependHTML(
                 "<div id='EditGPTWidget'>" .
                 "</div>"
-            );            
+            );
+
+            $modules = [ 'ext.EditGPT' ];
+            $moduleStyles = [ 'ext.EditGPT.styles' ];
+
+            if ($skin->getSkinName() !== 'citizen') {
+                $modules[] = 'ext.EditGPT.root';
+                $moduleStyles[] = 'ext.EditGPT.root.styles';
+            }
+
             $out->addJsConfigVars([
                 'EditGPTSecurityToken' => $GLOBALS['wgEditGPTSecurityToken'],
                 'EditGPTSpeech' => $GLOBALS['wgEditGPTSpeech']
             ]);
-            $out->addModuleStyles('ext.EditGPT.styles');
+            
+            $out->addModules( $modules );
+            $out->addModuleStyles( $moduleStyles );
         }
         return true;
-    }
-
-    public static function onResourceLoaderRegisterModules( ResourceLoader &$resourceLoader )
-    {
-        $resourceLoader->register(
-            'ext.EditGPT',
-            [
-                'scripts' => [ 'resources/EditGPT.js' ],
-                'styles' => [ 'resources/EditGPT.css' ],
-                'dependencies' => [ 'mediawiki.util', 'oojs-ui', 'oojs-ui.styles.icons-editing-core' ]
-            ]
-        );
     }
 }
 
