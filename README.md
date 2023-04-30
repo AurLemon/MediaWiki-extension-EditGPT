@@ -13,7 +13,9 @@
 | :- | :- |
 |  PHP | >= 7<br>扩展需要使用 cURL 函数，确保 libcurl 包已安装。可在 phpinfo 内查询 cURL 是否开启。|
 
-此外，请确保主机能够访问外网，包括防火墙配置或主机安全组设置。同时，为了避免地域原因导致您的 OpenAI 账户被封禁，请确保主机地域符合 OpenAI 要求。具体名单请参阅[支持的国家/地区](https://platform.openai.com/docs/supported-countries)。<br>网站主机位于香港地区的用户请不要直接使用，可更换主机为台湾地区、日本、新加坡等受支持的地区，也可使用[代理 API ](https://www.openai-asia.com/)或[云函数](https://cloud.tencent.com/product/scf)远程执行，具体可参阅网上其他教程。
+此外，请确保主机能够访问外网，包括防火墙配置或主机安全组设置。同时，为了避免地域原因导致您的 OpenAI 账户被封禁，请确保主机地域符合 OpenAI 要求。具体名单请参阅[支持的国家/地区](https://platform.openai.com/docs/supported-countries)。
+
+网站主机位于香港地区的用户请不要直接使用，可更换主机为台湾地区、日本、新加坡等受支持的地区，也可使用[代理 API ](https://www.openai-asia.com/)或[云函数](https://cloud.tencent.com/product/scf)远程执行。云函数操作办法可参阅[教程](https://github.com/riba2534/openai-scf-goproxy)。在执行完成后，将访问链接填入`$wgEditGPTAPIBase`即可。
 
 ## 特性
 * 通过后端发送请求。
@@ -50,11 +52,11 @@ $wgEditGPTSpeech = [
 ## 参数
 | 用途 | 参数 | 简介 | 值 |
 | :- | :- | :- | :- |
-| API 链接 | `$wgEditGPTAPIBase` | API 链接。默认为 OpenAI 的地址，如果需要更换为其它代理站点，可更换此信息。如`https://api.openai-asia.com`。 | 默认为`https://api.openai.com` |
-| API Key | `$wgEditGPTAPIKey` | API 密钥。 | 无，必填。 |
-| 调用模型 | `$wgEditGPTModel` | 调用的模型。此外，因请求尾链为`/v1/chat/completions`，暂不支持`text-embedding-ada-002`等其它请求方式的模型。 | 默认为`gpt-3.5-turbo` |
-| 最大 Token | `$wgEditGPTMaxTokens` | 客户端接受的最大 Token 数值。 | 默认为`2048` |
-| 模型温度 | `$wgEditGPTTemperature` | 模型温度，具体介绍可参见 OpenAI 的介绍。 | 默认为`0.7` |
-| 模型角色 | `$wgEditGPTRole` | 模型角色。 | 默认为`assistant` |
-| 话术 | `$wgEditGPTSpeech` | 预设话术。设置话术后，用户可以根据此处设定的话术信息发送请求。<br>话术示例：`设定的话术信息`+`提问的信息`。 | 数组。可参照上方示例配置。|
-| 安全令牌 | `$wgEditGPTSecurityToken` | 验证令牌，避免恶意请求后端。可自行设置。 | 默认为字符串。 |
+| API 链接 | `$wgEditGPTAPIBase` | API 链接。默认为 OpenAI 的地址，若使用云函数远程执行或其它代理站点，需要更换此配置文件。 | 字符串，默认值为`https://api.openai.com` |
+| API Key | `$wgEditGPTAPIKey` | API 密钥。 | 字符串，无默认值，必填 |
+| 调用模型 | `$wgEditGPTModel` | 调用的模型。此外，因请求尾链为`/v1/chat/completions`，暂不支持`text-embedding-ada-002`等其它请求方式的模型。 | 字符串，默认值为`gpt-3.5-turbo` |
+| 最大 Token | `$wgEditGPTMaxTokens` | 客户端接受的最大 Token 数值。 | 字符串，默认值为`2048` |
+| 模型温度 | `$wgEditGPTTemperature` | 模型温度，具体介绍可参见 OpenAI 的介绍。 | 字符串，默认值为`0.7` |
+| 模型角色 | `$wgEditGPTRole` | 模型角色。 | 字符串，默认值为`assistant` |
+| 话术 | `$wgEditGPTSpeech` | 预设话术。设置话术后，用户可以根据此处设定的话术信息发送请求。<br>话术示例：`设定的话术信息`+`提问的信息`。 | 数组，可参照上方示例配置 |
+| 安全令牌 | `$wgEditGPTSecurityToken` | 验证令牌，避免恶意请求后端。可自行设置。 | 字符串 |
