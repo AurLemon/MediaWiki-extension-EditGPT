@@ -63,10 +63,17 @@
 				"jquery.spinner",
 				"oojs-ui-core",
 				"oojs-ui-widgets"
-			],
-			"localBasePath": ".",
-			"remoteExtPath": "EditGPT"
+			]
+		},
+		"ext.EditGPT.root": {
+			"styles": [
+				"resources/Root.css"
+			]
 		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "",
+		"remoteExtPath": "EditGPT"
 	},
 	"config": {
 		"EditGPTAPIBase": {
