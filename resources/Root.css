@@ -9,7 +9,6 @@
 
 #EditGPTWidget #input textarea {
     box-sizing: unset;
-    color: red;
     border: 1px solid var(--border-color-base);
 }
 
