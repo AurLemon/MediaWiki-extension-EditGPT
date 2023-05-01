@@ -1,10 +1,13 @@
 :root {
     --color-primary: hsl(220, 60%, 50%);
     --color-primary--hover: hsl(220, 60%, calc(50% * 1.2));
-    --border-color-base: rgba(0, 0, 0, 0.5);
+    --border-color-base: rgba(0, 0, 0, 0.05);
     --opacity-icon-base: 0.6;
     --color-surface-1: hsl(0, 0%, 100%);
     --color-base: #54595d;
+    --box-shadow-dialog: 0 2.8px 2.2px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + .03)),0 6.7px 5.3px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + .01)),0 12.5px 10px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + .02)),0 22.3px 17.9px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + .02)),0 41.8px 33.4px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + .03)),0 100px 80px hsl(var(--surface-shadow) / var(--shadow-strength));
+    --surface-shadow: 220 10% 20%;
+    --surface-strength: 0.02;
 }
 
 #EditGPTWidget #input textarea {
