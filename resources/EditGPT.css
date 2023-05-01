@@ -164,7 +164,7 @@ html.skin-citizen-dark #HisDiv img {
 
 .menu-content {
     padding: 10px;
-    max-width: 300px;
+    width: 300px;
     max-height: 500px;
     display: flex;
     flex-direction: column;
@@ -251,7 +251,7 @@ html.skin-citizen-dark #EditGPTWidget #Console img {
     }
 
     .menu-content {
-        max-width: 200px;
+        width: 200px;
     }
 }
 
